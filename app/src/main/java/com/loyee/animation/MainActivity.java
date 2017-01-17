@@ -20,6 +20,7 @@ import android.view.animation.BaseInterpolator;
 import android.view.animation.BounceInterpolator;
 import android.view.animation.CycleInterpolator;
 import android.view.animation.DecelerateInterpolator;
+import android.view.animation.LayoutAnimationController;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
@@ -50,6 +51,11 @@ public class MainActivity extends AppCompatActivity {
         imgPic = (ImageView) findViewById(R.id.imgPic);
         interpolator = (TextView)findViewById(R.id.interpolator);
         anim = (TextView)findViewById(R.id.anim);
+
+        mAnimation = AnimationUtils.loadAnimation(this, R.anim.my_translate);
+        LayoutAnimationController layoutAnimationController = new LayoutAnimationController(mAnimation);
+        layoutAnimationController.start();
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP_MR1)
@@ -133,6 +139,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.imgPic:
                 Toast.makeText(MainActivity.this, "hello,i am imgPic", Toast.LENGTH_LONG).show();
                 break;
+            case R.id.layoutAnimationController:
+                startActivity(new Intent(this,LayoutAnimationControllerActivity.class));
+                return;
         }
         if(mAnimation==null) {
             Toast.makeText(MainActivity.this, "please select animation first", Toast.LENGTH_LONG).show();
